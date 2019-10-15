@@ -15,6 +15,9 @@ class App extends StatefulWidget{
 class AppState extends State<App> {
   List<RandomInfoModel> infos = []; 
   List<String> params = ['trivia', 'year', 'date', 'math'];
+  List<RandomInfoModel> like = [];
+  List<RandomInfoModel> dislike = [];
+  
   void fetchInfo() async{
     var el = randomChoice(params);
     var response = await get('http://numbersapi.com/random/$el?json');
@@ -35,9 +38,9 @@ class AppState extends State<App> {
       home: Scaffold(
         backgroundColor: Colors.deepPurple[900],
         appBar: AppBar(
-          title:Text('Number Fact App'),
+          title:Text('Random Fact App'),
         ),
-        body: RandomInfoList(infos),
+        body: RandomInfoList(infos.reversed.toList()),
         floatingActionButton: FloatingActionButton.extended(
           icon: Icon(Icons.pets),
           label: Text('Try Me!'),
